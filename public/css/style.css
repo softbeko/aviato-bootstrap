@@ -607,7 +607,7 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
 }
 .top-header .dropdown-menu {
   left: auto;
-  right: 0;
+  right: 167px;
   max-width: 300px;
 }
 @media (max-width: 480px) {
