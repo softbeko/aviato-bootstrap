@@ -285,8 +285,7 @@ input[type=email]:focus, input[type=password]:focus, input[type=text]:focus, inp
   transition: all 0.3s ease-in-out;
   width: 100%;
   height: auto;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .category-box a {
   display: block;
