@@ -10,9 +10,9 @@
   <ul>
     <% products.forEach(product => { %>
       <li>
-        <h2><%= product.name %></h2>
-        <p><%= product.description %></p>
-        <p>Fiyat: <%= product.price %> TL</p>
+        <h2>Stok Kodu: <%= product.STOKKODU %></h2>
+        <p>Ürün Adı: <%= product.URUNADI %></p>
+        <p>Fiyat: <%= product.SATISFIYATI %> <%= product.PARABIRIMI %></p>
       </li>
     <% }); %>
   </ul>

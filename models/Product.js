@@ -1,12 +1,21 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const ProductSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
-  description: String,
-  // Diğer özellikler...
+const productSchema = new mongoose.Schema({
+  URUNKARTIID: Number,
+  URUNID: Number,
+  STOKKODU: String,
+  URUNADI: String,
+  BREADCRUMBKAT: String,
+  KATEGORILER: String,
+  SEO_SAYFABASLIK: String,
+  SEO_ANAHTARKELIME: String,
+  SEO_SAYFAACIKLAMA: String,
+  MARKA: String,
+  TEDARIKCI: String,
+  SATISFIYATI: Number,
+  PARABIRIMI: String
 });
 
-const Product = mongoose.model("Product", ProductSchema);
+const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
