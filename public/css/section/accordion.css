@@ -1,6 +1,4 @@
-.accordion-button:not(.collapsed){
-    background-color: #ffff;
-}
+
 .accordion-button:focus{
     box-shadow: none;
 }
@@ -9,4 +7,6 @@
 }
 .accordion-body{
     background-color: #ffff;
+    padding-top: 0px;
+    padding-bottom: 2px;
 }
