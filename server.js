@@ -37,7 +37,7 @@ app.get("/api/products_all", async (req, res) => {
   }
 });
 
-const ITEMS_PER_PAGE = 24; // Sayfa başına ürün sayısı
+const ITEMS_PER_PAGE = 18; // Sayfa başına ürün sayısı
 let products_all = [];
 app.get("/", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
