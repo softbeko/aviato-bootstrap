@@ -3,14 +3,26 @@ const path = require("path");
 const mongoose = require("mongoose");
 const Product = require("./models/Product");
 const productRoutes = require("./routes/productRoutes");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const bcrypt = require("bcrypt");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.set("views", path.join(__dirname, "views"));
+
 app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 app.use("/products", productRoutes); // products route'unu yönlendir
 
@@ -38,7 +50,6 @@ app.get("/api/products_all", async (req, res) => {
 });
 
 const ITEMS_PER_PAGE = 18; // Sayfa başına ürün sayısı
-let products_all = [];
 app.get("/", async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   try {
@@ -62,5 +73,127 @@ app.get("/", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
+  }
+});
+
+// Giriş sayfasını göster
+app.get("/admin/login", (req, res) => {
+  res.render("admin/login");
+});
+
+app.get("/admin", (req, res) => {
+  if (req.session && req.session.user) {
+    // Kullanıcı oturum açmışsa admin sayfasını göster
+    res.render("admin/admin");
+  } else {
+    // Oturum açılmamışsa login sayfasına yönlendir
+    res.redirect("/admin/login");
+  }
+});
+
+// Giriş bilgilerini doğrula
+app.post("/admin/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Kullanıcıyı veritabanından bul
+    const user = await UserModel.findOne({ username }); // UserModel kullan
+
+    if (user) {
+      // Kullanıcının şifresini doğrula
+      const match = await bcrypt.compare(password, user.password);
+
+      if (match) {
+        req.session.user = user;
+        res.redirect("/admin");
+      } else {
+        // Şifre yanlışsa sadece bir alert göster
+        res.send('<script>alert("Sifre Yanlis"); window.location="/admin/login";</script>');
+      }
+    } else {
+      // Kullanıcı bulunamazsa sadece bir alert göster
+      res.send('<script>alert("Kullanici adi bulunamadi"); window.location="/admin/login";</script>');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+// User modelini oluştur
+const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
+
+// Şifre hash'leme
+userSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 10);
+  }
+  next();
+});
+
+const UserModel = mongoose.model("User", userSchema); // User modelini oluştur
+
+// İlk kullanıcıyı oluştur
+const createInitialUser = async () => {
+  try {
+    const existingUser = await UserModel.findOne({ username: "admin" });
+    if (!existingUser) {
+      const newUser = new UserModel({
+        // UserModel kullan
+        username: "admin1234",
+        password: "admin1234", // Burada gerçek şifrenizi güvenli bir şekilde saklamalısınız.
+      });
+      await newUser.save();
+      console.log("Initial user created successfully.");
+    } else {
+      console.log("Initial user already exists.");
+    }
+  } catch (error) {
+    console.error("Error creating initial user:", error);
+  }
+};
+
+// İlk kullanıcıyı oluştur
+createInitialUser();
+
+app.get("/admin", (req, res) => {
+  if (req.session && req.session.user) {
+    // Kullanıcı oturum açmışsa admin sayfasını göster
+    res.render("admin");
+  } else {
+    // Oturum açılmamışsa login sayfasına yönlendir
+    res.redirect("/admin/login");
+  }
+});
+
+// Giriş sayfasını göster
+app.get("/admin/login", (req, res) => {
+  res.render("admin/login");
+});
+
+// Giriş sayfasını göster
+app.get("/admin/login", (req, res) => {
+  res.render("admin/login");
+});
+
+app.get("/admin", (req, res) => {
+  if (req.session && req.session.user) {
+    // Kullanıcı oturum açmışsa admin sayfasını göster
+    res.render("admin/index");
+  } else {
+    // Oturum açılmamışsa login sayfasına yönlendir
+    res.redirect("/admin/login");
   }
 });
