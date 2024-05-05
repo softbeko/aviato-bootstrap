@@ -81,15 +81,33 @@ app.get("/admin/login", (req, res) => {
   res.render("admin/login");
 });
 
-app.get("/admin", (req, res) => {
-  if (req.session && req.session.user) {
-    // Kullanıcı oturum açmışsa admin sayfasını göster
-    res.render("admin/admin");
-  } else {
-    // Oturum açılmamışsa login sayfasına yönlendir
-    res.redirect("/admin/login");
+app.get("/admin", async (req, res) => {
+  const page = parseInt(req.query.page) || 1; // Sayfa numarasını al, eğer belirtilmemişse varsayılan olarak 1. sayfayı kullan
+  const perPage = 20; // Her sayfada kaç ürün gösterileceği
+
+  try {
+    const totalProducts = await Product.countDocuments(); // Toplam ürün sayısını al
+    const totalPages = Math.ceil(totalProducts / perPage); // Toplam sayfa sayısını hesapla
+
+    const products_all = await Product.find()
+      .skip((page - 1) * perPage) // Sayfalamak için gerekli olan başlangıç kaydını belirle
+      .limit(perPage); // Sayfalamak için gerekli olan ürün sayısını belirle
+
+    if (req.session && req.session.user) {
+      res.render("admin/admin", {
+        products_all,
+        totalPages,
+        currentPage: page,
+      });
+    } else {
+      res.redirect("/admin/login");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 });
+
 
 // Giriş bilgilerini doğrula
 app.post("/admin/login", async (req, res) => {
@@ -108,18 +126,21 @@ app.post("/admin/login", async (req, res) => {
         res.redirect("/admin");
       } else {
         // Şifre yanlışsa sadece bir alert göster
-        res.send('<script>alert("Sifre Yanlis"); window.location="/admin/login";</script>');
+        res.send(
+          '<script>alert("Sifre Yanlis"); window.location="/admin/login";</script>'
+        );
       }
     } else {
       // Kullanıcı bulunamazsa sadece bir alert göster
-      res.send('<script>alert("Kullanici adi bulunamadi"); window.location="/admin/login";</script>');
+      res.send(
+        '<script>alert("Kullanici adi bulunamadi"); window.location="/admin/login";</script>'
+      );
     }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
 });
-
 
 // User modelini oluştur
 const userSchema = new mongoose.Schema({
@@ -167,33 +188,3 @@ const createInitialUser = async () => {
 
 // İlk kullanıcıyı oluştur
 createInitialUser();
-
-app.get("/admin", (req, res) => {
-  if (req.session && req.session.user) {
-    // Kullanıcı oturum açmışsa admin sayfasını göster
-    res.render("admin");
-  } else {
-    // Oturum açılmamışsa login sayfasına yönlendir
-    res.redirect("/admin/login");
-  }
-});
-
-// Giriş sayfasını göster
-app.get("/admin/login", (req, res) => {
-  res.render("admin/login");
-});
-
-// Giriş sayfasını göster
-app.get("/admin/login", (req, res) => {
-  res.render("admin/login");
-});
-
-app.get("/admin", (req, res) => {
-  if (req.session && req.session.user) {
-    // Kullanıcı oturum açmışsa admin sayfasını göster
-    res.render("admin/index");
-  } else {
-    // Oturum açılmamışsa login sayfasına yönlendir
-    res.redirect("/admin/login");
-  }
-});

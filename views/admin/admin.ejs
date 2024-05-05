@@ -2,46 +2,6 @@
 
   <%- include('partials/bnavbar.ejs') %>
 
-    <div class="container-fluid mt-3">
-      <div class="row">
-        <div class="col-md-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action active">Ürünler</a>
-            <a href="#" class="list-group-item list-group-item-action">Ürün Ekle</a>
-            <a href="#" class="list-group-item list-group-item-action">Ürün Düzenle</a>
-            <a href="#" class="list-group-item list-group-item-action">Ürün Sil</a>
-          </div>
-        </div>
-        <div class="col-md-9">
-          <h2>Ürünler</h2>
-          <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">URUNID</th>
-                <th scope="col">STOKKODU</th>
-                <th scope="col">URUNADI</th>
-                <th scope="col">SATISFIYATI</th>
-                <th scope="col">ISLEMLER</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>VO 11405</td>
-                <td>jVOLVO S70 2.3 - 20V / 97-00 PERFORMANS BUJİ KABLOSU TAKIMI OEM ( 9445258) </td>
-                <td>
-                  2722.01
-                </td>
-                <td>
-                  <button type="button" class="btn btn-primary btn-sm">Düzenle</button>
-                  <button type="button" class="btn btn-danger btn-sm">Sil</button>
-                </td>
-              </tr>
-         
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+  <%- include('department/homepage.ejs') %>
 
     <%- include('partials/bfoot.ejs') %>

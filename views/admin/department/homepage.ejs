@@ -1,0 +1,78 @@
+<div class="container-fluid mt-3">
+  <div class="row">
+      <div class="col-md-3">
+          <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action active">Ürünler</a>
+              <a href="#" class="list-group-item list-group-item-action">Ürün Ekle</a>
+              <a href="#" class="list-group-item list-group-item-action">Ürün Düzenle</a>
+              <a href="#" class="list-group-item list-group-item-action">Ürün Sil</a>
+          </div>
+      </div>
+      <div class="col-md-9">
+          <h2>Ürünler</h2>
+          <table class="table">
+              <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">URUNID</th>
+                      <th scope="col">STOKKODU</th>
+                      <th scope="col">URUNADI</th>
+                      <th scope="col">SATISFIYATI</th>
+                      <th scope="col">ISLEMLER</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <% products_all.forEach(product => { %>
+                      <tr>
+                          <th id="URUNID" scope="row"><%= product.URUNKARTIID %></th>
+                          <td id="STOKKODU"><%= product.STOKKODU %></td>
+                          <td id="URUNADI"><%= product.URUNADI %> </td>
+                          <td id="SATISFIYATI">
+                              <%= product.SATISFIYATI %> <%= product.PARABIRIMI %>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-primary btn-sm">Düzenle</button>
+                              <button type="button" class="btn btn-danger btn-sm">Sil</button>
+                          </td>
+                      </tr>
+                  <% }); %>
+              </tbody>
+          </table>
+          
+        <!-- Sayfalama UI -->
+<div class="d-flex justify-content-center pagination">
+  <% if (currentPage > 1) { %>
+      <a href="/admin?page=<%= currentPage - 1 %>" class="page-link rounded-start-4 ">&laquo; Önceki</a>
+  <% } %>
+
+  <% let startPage = Math.max(currentPage - 1, 1); %>
+  <% let endPage = Math.min(currentPage + 1, totalPages); %>
+
+  <% if (startPage > 1) { %>
+      <a href="/admin?page=1" class="page-link">1</a>
+      <% if (startPage > 2) { %>
+          <span class="page-link">...</span>
+      <% } %>
+  <% } %>
+
+  <% for (let i = startPage; i <= endPage; i++) { %>
+      <a href="/admin?page=<%= i %>" class="page-link <%= currentPage === i ? 'active' : '' %>">
+          <%= i %>
+      </a>
+  <% } %>
+
+  <% if (endPage < totalPages) { %>
+      <% if (endPage < totalPages - 1) { %>
+          <span class="page-link">...</span>
+      <% } %>
+      <a href="/admin?page=<%= totalPages %>" class="page-link"><%= totalPages %></a>
+  <% } %>
+
+  <% if (currentPage < totalPages) { %>
+      <a href="/admin?page=<%= currentPage + 1 %>" class="page-link rounded-end-4">Sonraki &raquo;</a>
+  <% } %>
+</div>
+
+          
+      </div>
+  </div>
+</div>
