@@ -3,9 +3,9 @@
       <div class="col-md-3">
           <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action active">Ürünler</a>
-              <a href="#" class="list-group-item list-group-item-action">Ürün Ekle</a>
+              <a href="/admin/createProduct.ejs" class="list-group-item list-group-item-action">Ürün Ekle</a>
               <a href="#" class="list-group-item list-group-item-action">Ürün Düzenle</a>
-              <a href="#" class="list-group-item list-group-item-action">Ürün Sil</a>
+              <a href="/admin/deleteProduct.ejs" class="list-group-item list-group-item-action">Ürün Sil</a>
           </div>
       </div>
       <div class="col-md-9">
@@ -13,7 +13,7 @@
           <table class="table">
               <thead class="thead-dark">
                   <tr>
-                      <th scope="col">URUNID</th>
+                      <th scope="col">NO </th>
                       <th scope="col">STOKKODU</th>
                       <th scope="col">URUNADI</th>
                       <th scope="col">SATISFIYATI</th>
@@ -21,20 +21,23 @@
                   </tr>
               </thead>
               <tbody>
-                  <% products_all.forEach(product => { %>
-                      <tr>
-                          <th id="URUNID" scope="row"><%= product.URUNKARTIID %></th>
-                          <td id="STOKKODU"><%= product.STOKKODU %></td>
-                          <td id="URUNADI"><%= product.URUNADI %> </td>
-                          <td id="SATISFIYATI">
-                              <%= product.SATISFIYATI %> <%= product.PARABIRIMI %>
-                          </td>
-                          <td>
-                              <button type="button" class="btn btn-primary btn-sm">Düzenle</button>
-                              <button type="button" class="btn btn-danger btn-sm">Sil</button>
-                          </td>
-                      </tr>
-                  <% }); %>
+                <% let count = 1; %>
+                <% products_all.forEach(product => { %>
+                  <tr>
+                    <th scope="row"><%= count %></th>
+                      <td id="STOKKODU"><%= product.STOKKODU %></td>
+                      <td id="URUNADI"><%= product.URUNADI %> </td>
+                      <td id="SATISFIYATI">
+                          <%= product.SATISFIYATI %> <%= product.PARABIRIMI %>
+                      </td>
+                      <td>
+                          <button type="button" class="btn btn-primary btn-sm">Düzenle</button>
+                          <button id="delete-product-btn-<%= product._id %>" data-product-id="<%= product._id %>" type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<%= product._id %>')">Sil</button>
+                      </td>
+                  </tr>
+                  <% count++; %>
+
+              <% }); %>
               </tbody>
           </table>
           

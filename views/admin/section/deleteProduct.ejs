@@ -1,0 +1,76 @@
+<%- include('./../partials/bhead.ejs') %>
+
+<%- include('./../partials/bnavbar.ejs') %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center">Yeni Ürün Ekle</h1>
+                </div>
+                <div class="card-body">
+                    <form action="/add-product" method="POST">
+                        <div class="mb-3">
+                            <label for="urunAdi" class="form-label">Ürün Adı:</label>
+                            <input type="text" class="form-control" id="urunAdi" name="urunAdi" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="stokKodu" class="form-label">Stok Kodu:</label>
+                            <input type="text" class="form-control" id="stokKodu" name="stokKodu" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="urunKartiId" class="form-label">Ürün Kartı ID:</label>
+                            <input type="number" class="form-control" id="urunKartiId" name="urunKartiId" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="kategori" class="form-label">Kategori:</label>
+                            <input type="text" class="form-control" id="kategori" name="kategori">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="marka" class="form-label">Marka:</label>
+                            <input type="text" class="form-control" id="marka" name="marka">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tedarikci" class="form-label">Tedarikçi:</label>
+                            <input type="text" class="form-control" id="tedarikci" name="tedarikci">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="satisFiyati" class="form-label">Satış Fiyatı:</label>
+                            <input type="number" class="form-control" id="satisFiyati" name="satisFiyati" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="paraBirimi" class="form-label">Para Birimi:</label>
+                            <select class="form-select" id="paraBirimi" name="paraBirimi" required>
+                                <option value="TRY">TRY</option>
+                                <option value="USD">USD</option>
+                                <option value="EUR">EUR</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="aciklama" class="form-label">Açıklama:</label>
+                            <textarea class="form-control" id="aciklama" name="aciklama" rows="4" cols="50"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="resim" class="form-label">Ürün Resmi:</label>
+                            <input type="file" class="form-control" id="resim" name="resim" accept="image/*">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Ürünü Ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./../partials/bfoot.ejs') %>

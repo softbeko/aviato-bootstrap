@@ -188,3 +188,80 @@ const createInitialUser = async () => {
 
 // İlk kullanıcıyı oluştur
 createInitialUser();
+
+app.get("/admin/createProduct.ejs", async (req, res) => {
+  if (req.session && req.session.user) {
+    res.render("admin/section/createProduct");
+  } else {
+    res.redirect("/admin/login");
+  }
+});
+
+app.get("/admin/deleteProduct.ejs", async (req, res) => {
+  if (req.session && req.session.user) {
+    res.render("admin/section/deleteProduct");
+  } else {
+    res.redirect("/admin/login");
+  }
+});
+
+
+// app.js veya routes dosyanızdaki ilgili yerde
+app.post("/add-product", async (req, res) => {
+  try {
+    const {
+      urunAdi,
+      stokKodu,
+      urunKartiId,
+      kategori,
+      marka,
+      tedarikci,
+      satisFiyati,
+      paraBirimi,
+      aciklama,
+      resim,
+    } = req.body;
+
+    // Yeni ürün oluştur
+    const newProduct = new Product({
+      URUNADI: urunAdi,
+      STOKKODU: stokKodu,
+      URUNKARTIID: urunKartiId,
+      KATEGORILER: kategori,
+      MARKA: marka,
+      TEDARIKCI: tedarikci,
+      SATISFIYATI: satisFiyati,
+      PARABIRIMI: paraBirimi,
+      SEO_SAYFAACIKLAMA: aciklama,
+      RESIM: resim, // Bu kısmı gerekirse düzenleyin, örneğin resmin URL'sini buraya ekleyin
+    });
+
+    // Yeni ürünü veritabanına kaydet
+    await newProduct.save();
+
+    res.redirect("/admin"); // İşlem başarılıysa ana sayfaya yönlendir
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+// Önce router'ı oluşturun
+const router = express.Router();
+
+// Ürünü silme endpoint'i
+router.delete("/products/:id/delete", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    // Ürünü veritabanından bul ve sil
+    await Product.findByIdAndDelete(productId);
+    res.status(200).json({ message: "Ürün başarıyla silindi!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Ürün silinirken bir hata oluştu!" });
+  }
+});
+
+// Son olarak, router'ı kullanmanız gereken yere router'ı ekleyin
+app.use(router);
