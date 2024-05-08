@@ -108,7 +108,6 @@ app.get("/admin", async (req, res) => {
   }
 });
 
-
 // Giriş bilgilerini doğrula
 app.post("/admin/login", async (req, res) => {
   const { username, password } = req.body;
@@ -205,7 +204,6 @@ app.get("/admin/deleteProduct.ejs", async (req, res) => {
   }
 });
 
-
 // app.js veya routes dosyanızdaki ilgili yerde
 app.post("/add-product", async (req, res) => {
   try {
@@ -265,3 +263,67 @@ router.delete("/products/:id/delete", async (req, res) => {
 
 // Son olarak, router'ı kullanmanız gereken yere router'ı ekleyin
 app.use(router);
+
+router.get("/admin/edit-product/:id", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    // Ürünü veritabanından bul
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      // Ürün bulunamazsa hata sayfasına yönlendir
+      return res.status(404).send("Product not found");
+    }
+
+    // Ürün düzenleme formunu render et
+    res.render("admin/section/edit-product", { product });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/admin/edit-product/:id", async (req, res) => {
+  const productId = req.params.id;
+
+  try {
+    // Formdan gelen güncellenmiş ürün bilgilerini ayrı ayrı al
+    const {
+      urunAdi,
+      stokKodu,
+      urunKartiId,
+      kategori,
+      marka,
+      tedarikci,
+      satisFiyati,
+      paraBirimi,
+      aciklama,
+      resim,
+    } = req.body;
+
+    // Güncellenecek ürünün verisini oluştur
+    const updatedProductData = {
+      URUNADI: urunAdi,
+      STOKKODU: stokKodu,
+      URUNKARTIID: urunKartiId,
+      KATEGORILER: kategori,
+      MARKA: marka,
+      TEDARIKCI: tedarikci,
+      SATISFIYATI: satisFiyati,
+      PARABIRIMI: paraBirimi,
+      SEO_SAYFAACIKLAMA: aciklama,
+      RESIM: resim, // Bu kısmı gerekirse düzenleyin, örneğin resmin URL'sini buraya ekleyin
+    };
+
+    // Veritabanında ürünü güncelle
+    await Product.findByIdAndUpdate(productId, updatedProductData, {
+      new: true,
+    });
+
+    res.redirect("/admin"); // İşlem başarılıysa admin sayfasına yönlendir
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});

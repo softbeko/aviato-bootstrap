@@ -1,11 +1,11 @@
+<!-- admin/department/homepage.js -->
 <div class="container-fluid mt-3">
   <div class="row">
       <div class="col-md-3">
           <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action active">Ürünler</a>
               <a href="/admin/createProduct.ejs" class="list-group-item list-group-item-action">Ürün Ekle</a>
-              <a href="#" class="list-group-item list-group-item-action">Ürün Düzenle</a>
-              <a href="/admin/deleteProduct.ejs" class="list-group-item list-group-item-action">Ürün Sil</a>
+              <a href="" class="list-group-item list-group-item-action">Ürün Düzenle</a>
           </div>
       </div>
       <div class="col-md-9">
@@ -31,7 +31,7 @@
                           <%= product.SATISFIYATI %> <%= product.PARABIRIMI %>
                       </td>
                       <td>
-                          <button type="button" class="btn btn-primary btn-sm">Düzenle</button>
+                        <a href="/admin/edit-product/<%= product._id %>"  type="button"  class="btn btn-primary btn-sm">Düzenle</a>
                           <button id="delete-product-btn-<%= product._id %>" data-product-id="<%= product._id %>" type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('<%= product._id %>')">Sil</button>
                       </td>
                   </tr>

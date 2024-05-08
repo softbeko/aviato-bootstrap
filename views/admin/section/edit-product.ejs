@@ -1,0 +1,66 @@
+<!-- admin/section/edit-product.ejs -->
+<%- include('./../partials/bhead.ejs') %>
+
+    <%- include('./../partials/bnavbar.ejs') %>
+
+
+        <form action="/admin/edit-product/<%= product._id %>" method="POST">
+            <div class="mb-3">
+                <label for="urunAdi" class="form-label">Ürün Adı:</label>
+                <input type="text" class="form-control" id="urunAdi" name="urunAdi" required
+                    value="<%= product.URUNADI %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="stokKodu" class="form-label">Stok Kodu:</label>
+                <input type="text" class="form-control" id="stokKodu" name="stokKodu" value="<%= product.STOKKODU %>"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label for="urunKartiId" class="form-label">Ürün Kartı ID:</label>
+                <input type="number" class="form-control" id="urunKartiId" name="urunKartiId"
+                    value="<%= product.URUNKARTIID %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="kategori" class="form-label">Kategori:</label>
+                <input type="text" class="form-control" id="kategori" name="kategori"
+                    value="<%= product.KATEGORILER %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="marka" class="form-label">Marka:</label>
+                <input type="text" class="form-control" id="marka" name="marka" value="<%= product.MARKA %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="tedarikci" class="form-label">Tedarikçi:</label>
+                <input type="text" class="form-control" id="tedarikci" name="tedarikci"
+                    value="<%= product.TEDARIKCI %>">
+            </div>
+
+            <div class="mb-3">
+                <label for="satisFiyati" class="form-label">Satış Fiyatı:</label>
+                <input type="number" class="form-control" id="satisFiyati" name="satisFiyati"
+                    value="<%= product.SATISFIYATI %>" required>
+            </div>
+
+
+
+            <div class="mb-3">
+                <label for="aciklama" class="form-label">Açıklama:</label>
+                <textarea class="form-control" id="aciklama" name="aciklama" rows="4"
+                    cols="50"><%= product.SEO_SAYFAACIKLAMA %></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="resim" class="form-label">Ürün Resmi:</label>
+                <input type="file" class="form-control" id="resim" name="resim" accept="image/*">
+            </div>
+
+
+            <!-- Diğer ürün özelliklerini buraya ekleyin -->
+
+            <button type="submit" class="btn btn-primary">Ürünü Güncelle</button>
+        </form>
