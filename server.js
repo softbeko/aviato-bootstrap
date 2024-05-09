@@ -265,22 +265,26 @@ router.delete("/products/:id/delete", async (req, res) => {
 app.use(router);
 
 router.get("/admin/edit-product/:id", async (req, res) => {
-  const productId = req.params.id;
+  if (req.session && req.session.user) {
+    const productId = req.params.id;
 
-  try {
-    // Ürünü veritabanından bul
-    const product = await Product.findById(productId);
+    try {
+      // Ürünü veritabanından bul
+      const product = await Product.findById(productId);
 
-    if (!product) {
-      // Ürün bulunamazsa hata sayfasına yönlendir
-      return res.status(404).send("Product not found");
+      if (!product) {
+        // Ürün bulunamazsa hata sayfasına yönlendir
+        return res.status(404).send("Product not found");
+      }
+
+      // Ürün düzenleme formunu render et
+      res.render("admin/section/edit-product", { product });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
     }
-
-    // Ürün düzenleme formunu render et
-    res.render("admin/section/edit-product", { product });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Internal Server Error");
+  } else {
+    res.redirect("/admin/login");
   }
 });
 
@@ -293,7 +297,7 @@ router.post("/admin/edit-product/:id", async (req, res) => {
       urunAdi,
       stokKodu,
       urunKartiId,
-      kategori,
+      breadcrumbkat,
       marka,
       tedarikci,
       satisFiyati,
@@ -307,7 +311,7 @@ router.post("/admin/edit-product/:id", async (req, res) => {
       URUNADI: urunAdi,
       STOKKODU: stokKodu,
       URUNKARTIID: urunKartiId,
-      KATEGORILER: kategori,
+      BREADCRUMBKAT: breadcrumbkat,
       MARKA: marka,
       TEDARIKCI: tedarikci,
       SATISFIYATI: satisFiyati,
@@ -326,4 +330,13 @@ router.post("/admin/edit-product/:id", async (req, res) => {
     console.error(error);
     res.status(500).send("Internal Server Error");
   }
+});
+
+//PRODUCT-DETAİL
+
+app.get("/", (req, res) => {
+  res.render("product-detail");
+});
+app.get("/product-detail", (req, res) => {
+  res.render("product-detail");
 });
