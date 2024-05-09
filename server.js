@@ -334,9 +334,30 @@ router.post("/admin/edit-product/:id", async (req, res) => {
 
 //PRODUCT-DETAİL
 
-app.get("/", (req, res) => {
-  res.render("product-detail");
-});
-app.get("/product-detail", (req, res) => {
-  res.render("product-detail");
+
+
+app.get("/product-detail/:id", async (req, res) => {
+  const productId = req.params.id;
+  try {
+    // Belirli bir ürünü bul
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ error: "Ürün bulunamadı" });
+    }
+
+    // Ürünün kategorisini alın
+    const productCategory = product.category;
+
+    // Belirli bir kategoriye sahip diğer 6 ürünü alın
+    const relatedProducts = await Product.find({ category: productCategory, _id: { $ne: productId } }).limit(4);
+
+    // Ürünü render etmek için product-detail.ejs dosyasını kullan
+    res.render("product-detail", {
+      product,
+      relatedProducts,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });

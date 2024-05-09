@@ -13,7 +13,7 @@
 										<!-- me art lab slider -->
 										<div class='carousel-inner '>
 											<div class='item active'>
-												<img src='images/shop/products/product-1.jpg' alt=''
+												<img src='/images/shop/products/product-1.jpg' alt=''
 													data-zoom-image="images/shop/single-products/product-1.jpg" />
 											</div>
 										</div>
@@ -23,141 +23,125 @@
 						</div>
 						<div class="col-md-7">
 							<div class="single-product-details">
-								<h2>Eclipse Crossbody</h2>
-								<p class="product-price">$300</p>
-								<p class="product-description mt-20">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum ipsum dicta quod,
-									quia doloremque aut deserunt commodi quis. Totam a consequatur beatae nostrum, earum
-									consequuntur? Eveniet consequatur ipsum dicta recusandae.
+								<h2>
+									<%= product.URUNADI %>
+								</h2>
+								<p class="product-price">Fiyat: <%= product.SATISFIYATI %>
+										<%= product.PARABIRIMI %>
 								</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, velit, sunt
-									temporibus, nulla accusamus similique sapiente tempora, at atque cumque assumenda
-									minus asperiores est esse sequi dolore magnam. Debitis, explicabo.</p>
-								<a href="cart.html" class="btn btn-main mt-20">Add To Cart</a>
+
+								<p>SATIN ALACAĞINIZ BU ÜRÜN, TÜRKİYE'de İLK ve TEK GERÇEK ÖZELLİKLERE SAHİP PERFORMANS
+									BUJİ KABLOSU TAKIMIDIR.
+
+									Alacağınız bu ürünün kabloları ithal % 100 silikondan üretilen 8,5 mm kalınlığa
+									sahip ve 250 derece sıcaklığa dayanıklıdır.
+
+									Kablonun iç rezistansı 0,80 mikron nikel telden yapılmış olup en sık sarımlı
+									kablodur.
+
+									Bu kablo 1 metre için 5,60 KHOM/mt dirençe sahiptir. Ve satın alabileceğiniz en iyi
+									iletken buji kablosudur.
+
+									Bu buji kablosu aracınız için en kaliteli buji kablosudur ve koşulsuz garantilidir.
+
+								</p>
+								<a href="cart.html" class="btn btn-main mt-20">SEPETE EKLE</a>
+								<a href="cart.html" class="btn btn-main mt-20">ÜRÜNÜ SATIN AL</a>
+
 							</div>
 						</div>
 					</div>
 
 				</div>
 			</section>
-			<section class="products related-products section">
-				<div class="container">
-					<div class="row">
-						<div class="title text-center">
-							<h2>Related Products</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3">
-							<div class="product-item">
-								<div class="product-thumb">
-									<span class="bage">Sale</span>
-									<img class="img-responsive" src="images/shop/products/product-5.jpg"
-										alt="product-img" />
-									<div class="preview-meta">
-										<ul>
-											<li>
-												<span data-toggle="modal" data-target="#product-modal">
-													<i class="tf-ion-ios-search"></i>
-												</span>
-											</li>
-											<li>
-												<a href="#"><i class="tf-ion-ios-heart"></i></a>
-											</li>
-											<li>
-												<a href="#!"><i class="tf-ion-android-cart"></i></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="product-content">
-									<h4><a href="product-single.html">Reef Boardsport</a></h4>
-									<p class="price">$200</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="product-item">
-								<div class="product-thumb">
-									<img class="img-responsive" src="images/shop/products/product-1.jpg"
-										alt="product-img" />
-									<div class="preview-meta">
-										<ul>
-											<li>
-												<span data-toggle="modal" data-target="#product-modal">
-													<i class="tf-ion-ios-search-strong"></i>
-												</span>
-											</li>
-											<li>
-												<a href="#"><i class="tf-ion-ios-heart"></i></a>
-											</li>
-											<li>
-												<a href="#!"><i class="tf-ion-android-cart"></i></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="product-content">
-									<h4><a href="product-single.html">Rainbow Shoes</a></h4>
-									<p class="price">$200</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="product-item">
-								<div class="product-thumb">
-									<img class="img-responsive" src="images/shop/products/product-2.jpg"
-										alt="product-img" />
-									<div class="preview-meta">
-										<ul>
-											<li>
-												<span data-toggle="modal" data-target="#product-modal">
-													<i class="tf-ion-ios-search"></i>
-												</span>
-											</li>
-											<li>
-												<a href="#"><i class="tf-ion-ios-heart"></i></a>
-											</li>
-											<li>
-												<a href="#!"><i class="tf-ion-android-cart"></i></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="product-content">
-									<h4><a href="product-single.html">Strayhorn SP</a></h4>
-									<p class="price">$230</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="product-item">
-								<div class="product-thumb">
-									<img class="img-responsive" src="images/shop/products/product-3.jpg"
-										alt="product-img" />
-									<div class="preview-meta">
-										<ul>
-											<li>
-												<span data-toggle="modal" data-target="#product-modal">
-													<i class="tf-ion-ios-search"></i>
-												</span>
-											</li>
-											<li>
-												<a href="#"><i class="tf-ion-ios-heart"></i></a>
-											</li>
-											<li>
-												<a href="#!"><i class="tf-ion-android-cart"></i></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="product-content">
-									<h4><a href="product-single.html">Bradley Mid</a></h4>
-									<p class="price">$200</p>
+
+
+
+			<section class="container">
+				<div class="row">
+
+					<div class="accordion" id="accordionExample">
+						<div class="accordion-item border">
+							<h2 class="accordion-header">
+								<button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
+									data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									DETAY BİLGİ İÇİN TIKLAYIN
+								</button>
+							</h2>
+							<div id="collapseTwo" class="accordion-collapse collapse"
+								data-bs-parent="#accordionExample">
+								<div class="accordion-body my-3 rounded-4">
+									SATIN ALACAĞINIZ BU ÜRÜN, TÜRKİYE'de İLK ve TEK GERÇEK ÖZELLİKLERE SAHİP PERFORMANS
+									BUJİ KABLOSU TAKIMIDIR.
+
+									Alacağınız bu ürünün kabloları ithal % 100 silikondan üretilen 8,5 mm kalınlığa
+									sahip ve 250 derece sıcaklığa dayanıklıdır.
+
+									Kablonun iç rezistansı 0,80 mikron nikel telden yapılmış olup en sık sarımlı
+									kablodur.
+
+									Bu kablo 1 metre için 5,60 KHOM/mt dirençe sahiptir. Ve satın alabileceğiniz en iyi
+									iletken buji kablosudur.
+
+									Bu buji kablosu aracınız için en kaliteli buji kablosudur ve koşulsuz garantilidir.
+
+									Satın alıp kullanmaya başladığınızda memnun kalmazsanız bize iade edebilirsiniz. Hiç
+									bir kargo ücreti ödemeden paranız iade edilir.
+
+									Bu kablo takımı Benzinlii LPG li veya CNG li çalışan araçlar için kusursuzdur.
+
+									Kargo ücreti ve KDV fiyata dahildir.
+
+									Sipariş verdikten en geç 2 iş gün içinde MNG Kargoya teslim edilmektedir.
 								</div>
 							</div>
 						</div>
 
+					</div>
+
+				</div>
+				</div>
+
+
+
+			</section>
+
+			<section class="products related-products section">
+				<div class="container">
+					<div class="row">
+						<div class="title text-center">
+							<h2>Benzer Ürünler</h2>
+						</div>
+					</div>
+					<div class="row">
+						<% relatedProducts.forEach(product=> { %>
+							<div class="col-md-3">
+								<div class="product-item">
+									<div class="product-thumb">
+										<img class="img-responsive" src="/images/shop/products/product-1.jpg"
+											alt="product-img" />
+										<div class="preview-meta">
+											<ul>
+												<li>
+													<span data-toggle="modal" data-target="#product-modal">
+														<i class="tf-ion-ios-search"></i>
+													</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="product-content">
+										<h4><a href="/product-detail/<%= product._id %>">
+												<%= product.URUNADI %>
+											</a></h4>
+										<p class="price">
+											<%= product.SATISFIYATI %>
+												<%= product.PARABIRIMI %>
+										</p>
+									</div>
+								</div>
+							</div>
+							<% }); %>
 					</div>
 				</div>
 			</section>
